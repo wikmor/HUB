@@ -1,0 +1,31 @@
+# !-----------------------------------------------------------------------------------------------!
+#                       Welcome to the main configuration of ${project.name}
+# !-----------------------------------------------------------------------------------------------!
+
+# -------------------------------------------------------------------------------------------------
+# Settings related to the player join/quit event.
+# -------------------------------------------------------------------------------------------------
+Join_Quit_Events:
+
+  # Sent when players have 'hub.event.joinmessage'/'hub.event.quitmessage' permission!
+  # Support PlaceholderAPI.
+  #
+  # Built-in placeholders:
+  # {player} - The player's displayname.
+  # {username} - The player's username.
+  # {prefix} - The player's prefix. Require Vault and permissions plugin (e.g. LuckPerms).
+  # {suffix} - The player's suffix. Require Vault and permissions plugin (e.g. LuckPerms).
+  # {plugin_prefix} - The plugin's prefix.
+  Join_Message: '{plugin_prefix}{prefix}{player}{suffix} &6joined the lobby!'
+  Quit_Message: ''
+
+# -------------------------------------------------------------------------------------------------
+# The prefix used in front of most chat or console messages. You can manually use it with
+# {plugin_prefix} variable anywhere.
+# -------------------------------------------------------------------------------------------------
+Prefix: "&8[&9${project.name}&8]&7 "
+
+# -------------------------------------------------------------------------------------------------
+# Do not change this value, otherwise it will corrupt your plugin installation!
+# -------------------------------------------------------------------------------------------------
+Version: 1
