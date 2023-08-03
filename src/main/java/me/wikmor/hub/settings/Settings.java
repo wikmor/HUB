@@ -7,8 +7,10 @@ public final class Settings extends SimpleSettings {
 
 	@Override
 	protected int getConfigVersion() {
-		return 1;
+		return 2;
 	}
+
+	public static Boolean CAN_PLAYER_BREAK_BLOCKS;
 
 	public static class JoinQuitEvents {
 
@@ -25,5 +27,7 @@ public final class Settings extends SimpleSettings {
 
 	private static void init() {
 		setPathPrefix(null);
+
+		CAN_PLAYER_BREAK_BLOCKS = getBoolean("Can_Player_Break_Blocks");
 	}
 }

@@ -19,6 +19,15 @@ Join_Quit_Events:
   Join_Message: '{plugin_prefix}{prefix}{player}{suffix} &6joined the lobby!'
   Quit_Message: ''
 
+# Players with 'hub.event.blockbreak' permission can bypass this setting.
+Can_Player_Break_Blocks: false
+
+# -------------------------------------------------------------------------------------------------
+# What language should we use for messages? If it exists, the language file will be copied
+# to your messages/ folder where you can edit it.
+# -------------------------------------------------------------------------------------------------
+Locale: en
+
 # -------------------------------------------------------------------------------------------------
 # The prefix used in front of most chat or console messages. You can manually use it with
 # {plugin_prefix} variable anywhere.
@@ -28,4 +37,4 @@ Prefix: "&8[&9${project.name}&8]&7 "
 # -------------------------------------------------------------------------------------------------
 # Do not change this value, otherwise it will corrupt your plugin installation!
 # -------------------------------------------------------------------------------------------------
-Version: 1
+Version: 2
