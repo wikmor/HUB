@@ -2,6 +2,11 @@
 #                       Welcome to the main configuration of ${project.name}
 # !-----------------------------------------------------------------------------------------------!
 
+# Players with the 'hub.event.blockbreak' permission will bypass this setting.
+Can_Player_Break_Blocks: false
+# Players with the 'hub.event.blockplace' permission will bypass this setting.
+Can_Player_Place_Blocks: false
+
 # -------------------------------------------------------------------------------------------------
 # Settings related to the player join/quit event.
 # -------------------------------------------------------------------------------------------------
@@ -19,12 +24,8 @@ Join_Quit_Events:
   Join_Message: '{plugin_prefix}{prefix}{player}{suffix} &6joined the lobby!'
   Quit_Message: ''
 
-# Players with 'hub.event.blockbreak' permission can bypass this setting.
-Can_Player_Break_Blocks: false
-
 # -------------------------------------------------------------------------------------------------
-# What language should we use for messages? If it exists, the language file will be copied
-# to your messages/ folder where you can edit it.
+# What language should we use for messages? Use suffixes of files from localization/ folder.
 # -------------------------------------------------------------------------------------------------
 Locale: en
 

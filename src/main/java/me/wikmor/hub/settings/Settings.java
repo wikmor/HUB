@@ -11,6 +11,7 @@ public final class Settings extends SimpleSettings {
 	}
 
 	public static Boolean CAN_PLAYER_BREAK_BLOCKS;
+	public static Boolean CAN_PLAYER_PLACE_BLOCKS;
 
 	public static class JoinQuitEvents {
 
@@ -29,5 +30,6 @@ public final class Settings extends SimpleSettings {
 		setPathPrefix(null);
 
 		CAN_PLAYER_BREAK_BLOCKS = getBoolean("Can_Player_Break_Blocks");
+		CAN_PLAYER_PLACE_BLOCKS = getBoolean("Can_Player_Place_Blocks");
 	}
 }

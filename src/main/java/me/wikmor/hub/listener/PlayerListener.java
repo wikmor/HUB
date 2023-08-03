@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.mineacademy.fo.Common;
@@ -46,7 +47,18 @@ public final class PlayerListener implements Listener {
 		if (Settings.CAN_PLAYER_BREAK_BLOCKS || player.hasPermission("hub.event.blockbreak"))
 			return;
 
-		Common.tell(player, Lang.of("Events.Cannot_Break_Blocks"));
+		Common.tell(player, Lang.of("Events.Player.Cannot_Break_Blocks"));
+		event.setCancelled(true);
+	}
+
+	@EventHandler
+	public void onBlockPlace(BlockPlaceEvent event) {
+		Player player = event.getPlayer();
+
+		if (Settings.CAN_PLAYER_PLACE_BLOCKS || player.hasPermission("hub.event.blockplace"))
+			return;
+
+		Common.tell(player, Lang.of("Events.Player.Cannot_Place_Blocks"));
 		event.setCancelled(true);
 	}
 }

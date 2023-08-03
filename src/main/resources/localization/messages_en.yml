@@ -6,7 +6,9 @@
 # Messages related to events
 # -------------------------------------------------------------------------------------------------
 Events:
-  Cannot_Break_Blocks: "&cYou cannot break blocks!"
+  Player:
+    Cannot_Break_Blocks: "&cYou cannot break blocks!"
+    Cannot_Place_Blocks: "&cYou cannot place blocks!"
 
 
 # -------------------------------------------------------------------------------------------------
