@@ -7,11 +7,16 @@ public final class Settings extends SimpleSettings {
 
 	@Override
 	protected int getConfigVersion() {
-		return 2;
+		return 3;
 	}
 
-	public static Boolean CAN_PLAYER_BREAK_BLOCKS;
-	public static Boolean CAN_PLAYER_PLACE_BLOCKS;
+	public static Boolean BLOCK_BREAK;
+	public static Boolean BLOCK_PLACE;
+	public static Boolean ITEM_DROP;
+	public static Boolean ITEM_PICKUP;
+	public static Boolean HUNGER_LOSS;
+	public static Boolean WEATHER_CHANGE;
+	public static Boolean DEATH_MESSAGE;
 
 	public static class JoinQuitEvents {
 
@@ -29,7 +34,12 @@ public final class Settings extends SimpleSettings {
 	private static void init() {
 		setPathPrefix(null);
 
-		CAN_PLAYER_BREAK_BLOCKS = getBoolean("Can_Player_Break_Blocks");
-		CAN_PLAYER_PLACE_BLOCKS = getBoolean("Can_Player_Place_Blocks");
+		BLOCK_BREAK = getBoolean("Block_Break");
+		BLOCK_PLACE = getBoolean("Block_Place");
+		ITEM_DROP = getBoolean("Item_Drop");
+		ITEM_PICKUP = getBoolean("Item_Pickup");
+		HUNGER_LOSS = getBoolean("Hunger_Loss");
+		WEATHER_CHANGE = getBoolean("Weather_Change");
+		DEATH_MESSAGE = getBoolean("Death_Message");
 	}
 }

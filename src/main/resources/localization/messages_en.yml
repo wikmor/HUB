@@ -9,9 +9,11 @@ Events:
   Player:
     Cannot_Break_Blocks: "&cYou cannot break blocks!"
     Cannot_Place_Blocks: "&cYou cannot place blocks!"
+    Cannot_Drop_Items: "&cYou cannot drop items!"
+    Cannot_Pickup_Items: "&cYou cannot pickup items!"
 
 
 # -------------------------------------------------------------------------------------------------
 # Internal versioning number
 # -------------------------------------------------------------------------------------------------
-Version: 1
+Version: 2
