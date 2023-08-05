@@ -16,7 +16,7 @@ public final class Settings extends SimpleSettings {
 	public static Boolean ITEM_PICKUP;
 	public static Boolean HUNGER_LOSS;
 	public static Boolean WEATHER_CHANGE;
-	public static Boolean DEATH_MESSAGE;
+	public static Boolean DEATH_MESSAGES;
 
 	public static class JoinQuitEvents {
 
@@ -40,6 +40,6 @@ public final class Settings extends SimpleSettings {
 		ITEM_PICKUP = getBoolean("Item_Pickup");
 		HUNGER_LOSS = getBoolean("Hunger_Loss");
 		WEATHER_CHANGE = getBoolean("Weather_Change");
-		DEATH_MESSAGE = getBoolean("Death_Message");
+		DEATH_MESSAGES = getBoolean("Death_Messages");
 	}
 }

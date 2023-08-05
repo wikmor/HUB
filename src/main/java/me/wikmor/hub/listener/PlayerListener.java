@@ -110,7 +110,7 @@ public final class PlayerListener implements Listener {
 
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
-		if (Settings.DEATH_MESSAGE)
+		if (Settings.DEATH_MESSAGES)
 			return;
 
 		event.setDeathMessage("");

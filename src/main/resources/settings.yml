@@ -16,7 +16,7 @@ Item_Pickup: false
 
 Hunger_Loss: false
 Weather_Change: false
-Death_Message: false
+Death_Messages: false
 
 # -------------------------------------------------------------------------------------------------
 # Settings related to the player join/quit event.
