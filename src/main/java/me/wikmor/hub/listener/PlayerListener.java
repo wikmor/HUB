@@ -49,10 +49,10 @@ public final class PlayerListener implements Listener {
 	public void onBlockBreak(BlockBreakEvent event) {
 		Player player = event.getPlayer();
 
-		if (Settings.CAN_PLAYER_BREAK_BLOCKS || player.hasPermission("hub.event.blockbreak"))
+		if (Settings.BLOCK_BREAK || player.hasPermission("hub.event.blockbreak"))
 			return;
 
-		Common.tell(player, Lang.of("Events.Player.Cannot_Break_Blocks"));
+		Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Break_Blocks"));
 		event.setCancelled(true);
 	}
 
@@ -60,10 +60,10 @@ public final class PlayerListener implements Listener {
 	public void onBlockPlace(BlockPlaceEvent event) {
 		Player player = event.getPlayer();
 
-		if (Settings.CAN_PLAYER_PLACE_BLOCKS || player.hasPermission("hub.event.blockplace"))
+		if (Settings.BLOCK_PLACE || player.hasPermission("hub.event.blockplace"))
 			return;
 
-		Common.tell(player, Lang.of("Events.Player.Cannot_Place_Blocks"));
+		Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Place_Blocks"));
 		event.setCancelled(true);
 	}
 
