@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
@@ -89,6 +90,24 @@ public final class PlayerListener implements Listener {
 
 		Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Interact"));
 		event.setCancelled(true);
+	}
+
+	@EventHandler
+	public void onItemFrameItemTake(EntityDamageByEntityEvent event) {
+		if (Settings.BLOCK_INTERACT)
+			return;
+
+		Entity entity = event.getEntity();
+		Entity damager = event.getDamager();
+
+		if (entity instanceof ItemFrame && damager instanceof Player) {
+			Player player = (Player) damager;
+			if (player.hasPermission("hub.event.blockinteract"))
+				return;
+
+			Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Interact"));
+			event.setCancelled(true);
+		}
 	}
 
 	@EventHandler
