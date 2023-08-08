@@ -1,12 +1,16 @@
 package me.wikmor.hub.listener;
 
 import me.wikmor.hub.settings.Settings;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.ItemFrame;
+import org.bukkit.entity.Painting;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
@@ -56,6 +60,25 @@ public final class PlayerListener implements Listener {
 	}
 
 	@EventHandler
+	public void onHangingEntityBreak(HangingBreakByEntityEvent event) {
+		if (Settings.BLOCK_BREAK)
+			return;
+
+		Entity remover = event.getRemover();
+
+		if (!(remover instanceof Player))
+			return;
+
+		Player player = (Player) remover;
+		Entity entity = event.getEntity();
+		if (!(entity instanceof ItemFrame || entity instanceof Painting))
+			return;
+
+		Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Break_Blocks"));
+		event.setCancelled(true);
+	}
+
+	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event) {
 		Player player = event.getPlayer();
 
@@ -90,7 +113,7 @@ public final class PlayerListener implements Listener {
 	public void onLeafDecay(LeavesDecayEvent event) {
 		if (Settings.LEAVES_DECAY)
 			return;
-		
+
 		event.setCancelled(true);
 	}
 
