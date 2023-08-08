@@ -1,5 +1,6 @@
 package me.wikmor.hub;
 
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mineacademy.fo.model.HookManager;
@@ -13,6 +14,9 @@ public final class HUB extends SimplePlugin {
 
 	@Override
 	protected void onPluginStart() {
+		for (World world : getServer().getWorlds())
+			lockTimeIn(world);
+
 		Variables.addVariable("player", new Function<CommandSender, String>() {
 			@Override
 			public String apply(CommandSender commandSender) {
@@ -57,6 +61,11 @@ public final class HUB extends SimplePlugin {
 	@Override
 	protected void onReloadablesStart() {
 		Variable.loadVariables();
+	}
+
+	private void lockTimeIn(World world) {
+		world.setGameRuleValue("doDaylightCycle", "false");
+		world.setTime(5000);
 	}
 
 	@Override
