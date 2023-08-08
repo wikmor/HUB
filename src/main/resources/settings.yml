@@ -8,6 +8,8 @@ Block_Break: false
 # Players with the 'hub.event.blockplace' permission will bypass this setting.
 Block_Place: false
 
+Block_Burn: false
+
 # Players with the 'hub.event.itemdrop' permission will bypass this setting.
 Item_Drop: false
 
@@ -49,4 +51,4 @@ Prefix: "&8[&9${project.name}&8]&7 "
 # -------------------------------------------------------------------------------------------------
 # Do not change this value, otherwise it will corrupt your plugin installation!
 # -------------------------------------------------------------------------------------------------
-Version: 3
+Version: 4
