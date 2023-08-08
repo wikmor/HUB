@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockBurnEvent;
+import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -71,6 +72,18 @@ public final class PlayerListener implements Listener {
 	@EventHandler
 	public void onBlockBurn(BlockBurnEvent event) {
 		if (Settings.BLOCK_BURN)
+			return;
+
+		event.setCancelled(true);
+	}
+
+	@EventHandler
+	public void onFireSpread(BlockIgniteEvent event) {
+		if (Settings.FIRE_SPREAD)
+			return;
+
+		boolean isCauseSpread = event.getCause() == BlockIgniteEvent.IgniteCause.SPREAD;
+		if (!isCauseSpread)
 			return;
 
 		event.setCancelled(true);

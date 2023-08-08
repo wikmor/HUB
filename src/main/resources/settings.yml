@@ -9,6 +9,7 @@ Block_Break: false
 Block_Place: false
 
 Block_Burn: false
+Fire_Spread: false
 
 # Players with the 'hub.event.itemdrop' permission will bypass this setting.
 Item_Drop: false

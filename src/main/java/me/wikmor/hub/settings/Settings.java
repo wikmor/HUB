@@ -13,6 +13,7 @@ public final class Settings extends SimpleSettings {
 	public static Boolean BLOCK_BREAK;
 	public static Boolean BLOCK_PLACE;
 	public static Boolean BLOCK_BURN;
+	public static Boolean FIRE_SPREAD;
 	public static Boolean ITEM_DROP;
 	public static Boolean ITEM_PICKUP;
 	public static Boolean HUNGER_LOSS;
@@ -38,6 +39,7 @@ public final class Settings extends SimpleSettings {
 		BLOCK_BREAK = getBoolean("Block_Break");
 		BLOCK_PLACE = getBoolean("Block_Place");
 		BLOCK_BURN = getBoolean("Block_Burn");
+		FIRE_SPREAD = getBoolean("Fire_Spread");
 		ITEM_DROP = getBoolean("Item_Drop");
 		ITEM_PICKUP = getBoolean("Item_Pickup");
 		HUNGER_LOSS = getBoolean("Hunger_Loss");
