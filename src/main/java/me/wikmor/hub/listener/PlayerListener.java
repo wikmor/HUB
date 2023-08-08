@@ -11,10 +11,7 @@ import org.bukkit.event.block.*;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.annotation.AutoRegister;
@@ -75,6 +72,22 @@ public final class PlayerListener implements Listener {
 			return;
 
 		Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Break_Blocks"));
+		event.setCancelled(true);
+	}
+
+	@EventHandler
+	public void onItemFrameRotate(PlayerInteractEntityEvent event) {
+		Player player = event.getPlayer();
+
+		if (Settings.BLOCK_INTERACT || player.hasPermission("hub.event.blockinteract"))
+			return;
+
+		Entity clickedEntity = event.getRightClicked();
+
+		if (!(clickedEntity instanceof ItemFrame))
+			return;
+
+		Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Interact"));
 		event.setCancelled(true);
 	}
 

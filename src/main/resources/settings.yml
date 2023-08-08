@@ -5,6 +5,9 @@
 # Players with the 'hub.event.blockbreak' permission will bypass this setting.
 Block_Break: false
 
+# Players with the 'hub.event.blockinteract' permission will bypass this setting.
+Block_Interact: false
+
 # Players with the 'hub.event.blockplace' permission will bypass this setting.
 Block_Place: false
 

@@ -11,6 +11,7 @@ public final class Settings extends SimpleSettings {
 	}
 
 	public static Boolean BLOCK_BREAK;
+	public static Boolean BLOCK_INTERACT;
 	public static Boolean BLOCK_PLACE;
 	public static Boolean BLOCK_BURN;
 	public static Boolean FIRE_SPREAD;
@@ -38,6 +39,7 @@ public final class Settings extends SimpleSettings {
 		setPathPrefix(null);
 
 		BLOCK_BREAK = getBoolean("Block_Break");
+		BLOCK_INTERACT = getBoolean("Block_Interact");
 		BLOCK_PLACE = getBoolean("Block_Place");
 		BLOCK_BURN = getBoolean("Block_Burn");
 		FIRE_SPREAD = getBoolean("Fire_Spread");
