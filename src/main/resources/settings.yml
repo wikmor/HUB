@@ -2,29 +2,6 @@
 #                       Welcome to the main configuration of ${project.name}
 # !-----------------------------------------------------------------------------------------------!
 
-# Players with the 'hub.event.blockbreak' permission will bypass this setting.
-Block_Break: false
-
-# Players with the 'hub.event.blockinteract' permission will bypass this setting.
-Block_Interact: false
-
-# Players with the 'hub.event.blockplace' permission will bypass this setting.
-Block_Place: false
-
-Block_Burn: false
-Fire_Spread: false
-Leaves_Decay: false
-
-# Players with the 'hub.event.itemdrop' permission will bypass this setting.
-Item_Drop: false
-
-# Players with the 'hub.event.itempickup' permission will bypass this setting.
-Item_Pickup: false
-
-Hunger_Loss: false
-Weather_Change: false
-Death_Messages: false
-
 # -------------------------------------------------------------------------------------------------
 # Settings related to the player join/quit event.
 # -------------------------------------------------------------------------------------------------
@@ -43,6 +20,32 @@ Join_Quit_Events:
   Quit_Message: ''
 
 # -------------------------------------------------------------------------------------------------
+# Hub/lobby protection
+# -------------------------------------------------------------------------------------------------
+
+Block_Break: false
+Block_Interact: false
+Block_Place: false
+Block_Burn: false
+
+Drowning_Damage: false
+Fall_Damage: false
+Fire_Damage: false
+
+Fire_Spread: false
+Leaves_Decay: false
+Item_Drop: false
+Item_Pickup: false
+Hunger_Loss: false
+Mob_Spawn: false
+Weather_Change: false
+
+# -------------------------------------------------------------------------------------------------
+# Other flags
+# -------------------------------------------------------------------------------------------------
+Death_Messages: false
+
+# -------------------------------------------------------------------------------------------------
 # What language should we use for messages? Use suffixes of files from localization/ folder.
 # -------------------------------------------------------------------------------------------------
 Locale: en
@@ -56,4 +59,4 @@ Prefix: "&8[&9${project.name}&8]&7 "
 # -------------------------------------------------------------------------------------------------
 # Do not change this value, otherwise it will corrupt your plugin installation!
 # -------------------------------------------------------------------------------------------------
-Version: 4
+Version: ${config.version}

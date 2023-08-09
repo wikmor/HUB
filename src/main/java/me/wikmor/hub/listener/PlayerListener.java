@@ -1,18 +1,20 @@
 package me.wikmor.hub.listener;
 
 import me.wikmor.hub.settings.Settings;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.ItemFrame;
-import org.bukkit.entity.Painting;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.*;
+import org.bukkit.event.block.BlockIgniteEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.hanging.HangingBreakByEntityEvent;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.annotation.AutoRegister;
@@ -47,67 +49,15 @@ public final class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onBlockBreak(BlockBreakEvent event) {
-		Player player = event.getPlayer();
-
-		if (Settings.BLOCK_BREAK || player.hasPermission("hub.event.blockbreak"))
+	public void onCreatureSpawn(CreatureSpawnEvent event) {
+		if (Settings.MOB_SPAWN)
 			return;
 
-		Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Break_Blocks"));
+		boolean isSpawnedByPlugins = event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM;
+		if (isSpawnedByPlugins)
+			return;
+
 		event.setCancelled(true);
-	}
-
-	@EventHandler
-	public void onHangingEntityBreak(HangingBreakByEntityEvent event) {
-		if (Settings.BLOCK_BREAK)
-			return;
-
-		Entity remover = event.getRemover();
-
-		if (!(remover instanceof Player))
-			return;
-
-		Player player = (Player) remover;
-		Entity entity = event.getEntity();
-		if (!(entity instanceof ItemFrame || entity instanceof Painting))
-			return;
-
-		Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Break_Blocks"));
-		event.setCancelled(true);
-	}
-
-	@EventHandler
-	public void onItemFrameRotate(PlayerInteractEntityEvent event) {
-		Player player = event.getPlayer();
-
-		if (Settings.BLOCK_INTERACT || player.hasPermission("hub.event.blockinteract"))
-			return;
-
-		Entity clickedEntity = event.getRightClicked();
-
-		if (!(clickedEntity instanceof ItemFrame))
-			return;
-
-		Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Interact"));
-		event.setCancelled(true);
-	}
-
-	@EventHandler
-	public void onItemFrameItemTake(EntityDamageByEntityEvent event) {
-		if (Settings.BLOCK_INTERACT)
-			return;
-
-		Entity entity = event.getEntity();
-		Entity damager = event.getDamager();
-
-		if (entity instanceof ItemFrame && damager instanceof Player) {
-			Player player = (Player) damager;
-			if (player.hasPermission("hub.event.blockinteract"))
-				return;
-
-			Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Interact"));
-			event.setCancelled(true);
-		}
 	}
 
 	@EventHandler
@@ -122,12 +72,10 @@ public final class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onBlockBurn(BlockBurnEvent event) {
-		if (Settings.BLOCK_BURN)
-			return;
-
-		event.setCancelled(true);
+	public void onEntityDamage(EntityDamageByEntityEvent event) {
+		// TODO: disable PvP
 	}
+
 
 	@EventHandler
 	public void onFireSpread(BlockIgniteEvent event) {
