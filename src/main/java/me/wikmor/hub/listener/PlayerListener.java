@@ -4,10 +4,6 @@ import me.wikmor.hub.settings.Settings;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockIgniteEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.block.LeavesDecayEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -49,49 +45,19 @@ public final class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onCreatureSpawn(CreatureSpawnEvent event) {
-		if (Settings.MOB_SPAWN)
+	public void onDeath(PlayerDeathEvent event) {
+		if (Settings.DEATH_MESSAGES)
 			return;
 
-		boolean isSpawnedByPlugins = event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM;
-		if (isSpawnedByPlugins)
-			return;
-
-		event.setCancelled(true);
+		event.setDeathMessage("");
 	}
 
 	@EventHandler
-	public void onBlockPlace(BlockPlaceEvent event) {
-		Player player = event.getPlayer();
-
-		if (Settings.BLOCK_PLACE || player.hasPermission("hub.event.blockplace"))
+	public void onHungerLoss(FoodLevelChangeEvent event) {
+		if (Settings.HUNGER_LOSS)
 			return;
 
-		Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Place_Blocks"));
-		event.setCancelled(true);
-	}
-
-	@EventHandler
-	public void onEntityDamage(EntityDamageByEntityEvent event) {
-		// TODO: disable PvP
-	}
-
-
-	@EventHandler
-	public void onFireSpread(BlockIgniteEvent event) {
-		if (Settings.FIRE_SPREAD)
-			return;
-
-		boolean isCauseSpread = event.getCause() == BlockIgniteEvent.IgniteCause.SPREAD;
-		if (!isCauseSpread)
-			return;
-
-		event.setCancelled(true);
-	}
-
-	@EventHandler
-	public void onLeafDecay(LeavesDecayEvent event) {
-		if (Settings.LEAVES_DECAY)
+		if (!(event.getEntity() instanceof Player))
 			return;
 
 		event.setCancelled(true);
@@ -120,14 +86,8 @@ public final class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onHungerLoss(FoodLevelChangeEvent event) {
-		if (Settings.HUNGER_LOSS)
-			return;
-
-		if (!(event.getEntity() instanceof Player))
-			return;
-
-		event.setCancelled(true);
+	public void onEntityDamage(EntityDamageByEntityEvent event) {
+		// TODO: disable PvP
 	}
 
 	@EventHandler
@@ -136,13 +96,5 @@ public final class PlayerListener implements Listener {
 			return;
 
 		event.setCancelled(true);
-	}
-
-	@EventHandler
-	public void onDeath(PlayerDeathEvent event) {
-		if (Settings.DEATH_MESSAGES)
-			return;
-
-		event.setDeathMessage("");
 	}
 }

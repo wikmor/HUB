@@ -10,8 +10,7 @@ import org.bukkit.entity.Painting;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockBurnEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
@@ -100,6 +99,17 @@ public final class ProtectionListener implements Listener {
 	}
 
 	@EventHandler
+	public void onBlockPlace(BlockPlaceEvent event) {
+		Player player = event.getPlayer();
+
+		if (Settings.BLOCK_PLACE || player.hasPermission("hub.event.blockplace"))
+			return;
+
+		Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Place_Blocks"));
+		event.setCancelled(true);
+	}
+
+	@EventHandler
 	public void onPlayerDamage(EntityDamageEvent event) {
 		if (!(event.getEntity() instanceof Player))
 			return;
@@ -143,5 +153,25 @@ public final class ProtectionListener implements Listener {
 				event.setCancelled(true);
 				break;
 		}
+	}
+
+	@EventHandler
+	public void onFireSpread(BlockIgniteEvent event) {
+		if (Settings.FIRE_SPREAD)
+			return;
+
+		boolean isCauseSpread = event.getCause() == BlockIgniteEvent.IgniteCause.SPREAD;
+		if (!isCauseSpread)
+			return;
+
+		event.setCancelled(true);
+	}
+
+	@EventHandler
+	public void onLeafDecay(LeavesDecayEvent event) {
+		if (Settings.LEAVES_DECAY)
+			return;
+
+		event.setCancelled(true);
 	}
 }
