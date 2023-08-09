@@ -13,7 +13,7 @@
     <name>HUB</name>
 
     <!-- Change to the appropriate plugin's version, starting at 1.0.0. -->
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 
     <!-- DO NOT EDIT. -->
     <packaging>jar</packaging>
@@ -25,6 +25,8 @@
 
         <!-- Change to the full path where your main plugin class is located. -->
         <main.class>me.wikmor.hub.HUB</main.class>
+
+        <config.version>4</config.version>
 
         <!-- Change the Java version this plugin is built on.
 
