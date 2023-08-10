@@ -4,6 +4,8 @@ import me.wikmor.hub.HUB;
 import me.wikmor.hub.settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Painting;
@@ -61,15 +63,33 @@ public final class ProtectionListener implements Listener {
 	}
 
 	@EventHandler
-	public void onBlockInteract(PlayerInteractEvent event) {
-		// TODO: disable player interaction with doors, levers, etc.
+	public void onInteract(PlayerInteractEvent event) {
+		Player player = event.getPlayer();
+
+		if (Settings.BLOCK_INTERACT || player.hasPermission("hub.event.interact"))
+			return;
+
+		Block clickedBlock = event.getClickedBlock();
+		if (clickedBlock == null)
+			return;
+
+		Action action = event.getAction();
+		if (action == Action.RIGHT_CLICK_BLOCK) {
+			if (clickedBlock.getType() == Material.LEVER) {
+				Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Interact"));
+				event.setCancelled(true);
+			}
+		} else if (action == Action.PHYSICAL && clickedBlock.getType() == Material.FARMLAND) {
+			Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Interact"));
+			event.setCancelled(true);
+		}
 	}
 
 	@EventHandler
 	public void onItemFrameRotate(PlayerInteractEntityEvent event) {
 		Player player = event.getPlayer();
 
-		if (Settings.BLOCK_INTERACT || player.hasPermission("hub.event.blockinteract"))
+		if (Settings.BLOCK_INTERACT || player.hasPermission("hub.event.interact"))
 			return;
 
 		Entity clickedEntity = event.getRightClicked();
@@ -90,7 +110,7 @@ public final class ProtectionListener implements Listener {
 
 		if (entity instanceof ItemFrame && damager instanceof Player) {
 			Player player = (Player) damager;
-			if (player.hasPermission("hub.event.blockinteract"))
+			if (player.hasPermission("hub.event.interact"))
 				return;
 
 			Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Interact"));
