@@ -4,7 +4,6 @@ import me.wikmor.hub.HUB;
 import me.wikmor.hub.settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ItemFrame;
@@ -20,10 +19,33 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.annotation.AutoRegister;
+import org.mineacademy.fo.remain.CompMaterial;
 import org.mineacademy.fo.settings.Lang;
+
+import java.util.Arrays;
+import java.util.List;
 
 @AutoRegister
 public final class ProtectionListener implements Listener {
+
+	private List<CompMaterial> interactables = Arrays.asList(
+			CompMaterial.ACACIA_FENCE_GATE,
+			CompMaterial.ACACIA_TRAPDOOR,
+			CompMaterial.BIRCH_FENCE_GATE,
+			CompMaterial.BIRCH_TRAPDOOR,
+			CompMaterial.CHEST,
+			CompMaterial.DARK_OAK_FENCE_GATE,
+			CompMaterial.DARK_OAK_TRAPDOOR,
+			CompMaterial.ENDER_CHEST,
+			CompMaterial.FURNACE,
+			CompMaterial.JUNGLE_FENCE_GATE,
+			CompMaterial.JUNGLE_TRAPDOOR,
+			CompMaterial.OAK_FENCE_GATE,
+			CompMaterial.OAK_TRAPDOOR,
+			CompMaterial.LEVER,
+			CompMaterial.SPRUCE_FENCE_GATE,
+			CompMaterial.SPRUCE_TRAPDOOR
+	);
 
 	@EventHandler
 	public void onBlockBurn(BlockBurnEvent event) {
@@ -62,7 +84,7 @@ public final class ProtectionListener implements Listener {
 		event.setCancelled(true);
 	}
 
-	@EventHandler
+	@EventHandler // TODO: To be continued
 	public void onInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 
@@ -74,14 +96,24 @@ public final class ProtectionListener implements Listener {
 			return;
 
 		Action action = event.getAction();
-		if (action == Action.RIGHT_CLICK_BLOCK) {
-			if (clickedBlock.getType() == Material.LEVER) {
+		boolean isRightClickBlock = action != Action.LEFT_CLICK_BLOCK &&
+				action != Action.LEFT_CLICK_AIR &&
+				action != Action.RIGHT_CLICK_AIR;
+		if (!isRightClickBlock)
+			return;
+
+		preventFirstInteraction(player, clickedBlock, event);
+	}
+
+	private void preventFirstInteraction(Player player, Block clickedBlock, PlayerInteractEvent event) {
+		for (CompMaterial interactable : interactables) {
+//			System.out.println("Block = " + clickedBlock);
+//			System.out.println(interactable.getMaterial());
+			if (interactable.getMaterial() == clickedBlock.getType()) {
 				Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Interact"));
 				event.setCancelled(true);
+				break;
 			}
-		} else if (action == Action.PHYSICAL && clickedBlock.getType() == Material.FARMLAND) {
-			Common.tellTimed(3, player, Lang.of("Events.Player.Cannot_Interact"));
-			event.setCancelled(true);
 		}
 	}
 
