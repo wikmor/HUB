@@ -2,12 +2,14 @@ package me.wikmor.hub.settings;
 
 import org.mineacademy.fo.settings.SimpleSettings;
 
+import java.util.List;
+
 @SuppressWarnings("unused")
 public final class Settings extends SimpleSettings {
 
 	@Override
 	protected int getConfigVersion() {
-		return 4;
+		return Settings.VERSION;
 	}
 
 	public static Boolean BLOCK_BURN;
@@ -25,6 +27,21 @@ public final class Settings extends SimpleSettings {
 	public static Boolean ITEM_PICKUP;
 	public static Boolean LEAVES_DECAY;
 	public static Boolean WEATHER_CHANGE;
+
+	public static class Scoreboard {
+
+		public static String TITLE;
+		public static List<String> LINES;
+		public static Integer REFRESH_RATE_TICKS;
+
+		private static void init() {
+			setPathPrefix("Scoreboard");
+
+			TITLE = getString("Title");
+			LINES = getStringList("Lines");
+			REFRESH_RATE_TICKS = getInteger("Refresh_Rate_Ticks");
+		}
+	}
 
 	public static class JoinQuitEvents {
 

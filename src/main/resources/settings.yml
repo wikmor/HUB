@@ -3,6 +3,21 @@
 # !-----------------------------------------------------------------------------------------------!
 
 # -------------------------------------------------------------------------------------------------
+# SCOREBOARD luckperms_primary_group_name
+# -------------------------------------------------------------------------------------------------
+Scoreboard:
+  Title: "&e&lHUB"
+  Lines:
+    - "&7%server_time_MM/dd/yy HH:mm:ss%"
+    - ""
+    - "&fRank: %luckperms_primary_group_name%"
+    - ""
+    - "&fPlayers: &a{online}"
+    - ""
+    - "&egithub.com/wikmor/HUB"
+  Refresh_Rate_Ticks: 20
+
+# -------------------------------------------------------------------------------------------------
 # Settings related to the player join/quit event.
 # -------------------------------------------------------------------------------------------------
 Join_Quit_Events:
@@ -16,8 +31,8 @@ Join_Quit_Events:
   # {prefix} - The player's prefix. Require Vault and permissions plugin (e.g. LuckPerms).
   # {suffix} - The player's suffix. Require Vault and permissions plugin (e.g. LuckPerms).
   # {plugin_prefix} - The plugin's prefix.
-  Join_Message: '{plugin_prefix}{prefix}{player}{suffix} &6joined the lobby!'
-  Quit_Message: ''
+  Join_Message: "{plugin_prefix}{prefix}{player}{suffix} &6joined the lobby!"
+  Quit_Message: ""
 
 # -------------------------------------------------------------------------------------------------
 # Hub/lobby protection
