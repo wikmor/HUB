@@ -1,5 +1,6 @@
 package me.wikmor.hub.settings;
 
+import org.mineacademy.fo.remain.CompMaterial;
 import org.mineacademy.fo.settings.SimpleSettings;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public final class Settings extends SimpleSettings {
 
 	@Override
 	protected int getConfigVersion() {
-		return Settings.VERSION;
+		return 6;
 	}
 
 	public static Boolean BLOCK_BURN;
@@ -40,6 +41,21 @@ public final class Settings extends SimpleSettings {
 			TITLE = getString("Title");
 			LINES = getStringList("Lines");
 			REFRESH_RATE_TICKS = getInteger("Refresh_Rate_Ticks");
+		}
+	}
+
+	public static class ServerSelector {
+
+		public static CompMaterial MATERIAL;
+		public static String NAME;
+		public static List<String> LORE;
+
+		private static void init() {
+			setPathPrefix("Server_Selector");
+
+			MATERIAL = getMaterial("Material");
+			NAME = getString("Name");
+			LORE = getStringList("Lore");
 		}
 	}
 

@@ -1,5 +1,6 @@
 package me.wikmor.hub.listener;
 
+import me.wikmor.hub.settings.ServerSelectorItem;
 import me.wikmor.hub.settings.Settings;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,6 +24,8 @@ public final class PlayerListener implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
+		
+		ServerSelectorItem.getInstance().give(player, 0);
 
 		if (!player.hasPermission("hub.event.joinmessage")) {
 			event.setJoinMessage("");

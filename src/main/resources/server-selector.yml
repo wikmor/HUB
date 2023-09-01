@@ -1,0 +1,14 @@
+Server_Selector:
+  Title: "Server Selector"
+  Size: 27
+  Buttons:
+    Survival:
+      Slot: 12
+      Material: DIAMOND_SWORD
+      Title: "Survival"
+      Lore:
+        - ""
+        - "Click this button"
+        - "to join survival server"
+      Click:
+        Player_Command: "/server survival"

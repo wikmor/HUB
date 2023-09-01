@@ -1,5 +1,6 @@
 package me.wikmor.hub;
 
+import me.wikmor.hub.settings.ServerSelectorMenuData;
 import me.wikmor.hub.settings.Settings;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -22,6 +23,8 @@ public final class HUB extends SimplePlugin {
 		scoreboardTask = getServer()
 				.getScheduler()
 				.runTaskTimer(this, ScoreboardTask.getInstance(), 0, Settings.Scoreboard.REFRESH_RATE_TICKS);
+
+		ServerSelectorMenuData.loadMenus();
 
 		for (World world : getServer().getWorlds())
 			lockTimeIn(world);
